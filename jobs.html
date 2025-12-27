@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>求人一覧 | 建設現場監督マッチング</title>
+    <meta name="description" content="建設業界の現場監督求人一覧。条件を指定して最適な求人を検索できます。">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    
+    <style>
+        /* Jobs Page Specific Styles */
+        .jobs-page {
+            background-color: var(--gray-50);
+            min-height: 100vh;
+        }
+        
+        .page-header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+            color: var(--white);
+            padding: var(--spacing-xl) 0;
+            text-align: center;
+        }
+        
+        .page-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        .page-subtitle {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        .jobs-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: var(--spacing-xl) var(--spacing-md);
+        }
+        
+        .jobs-layout {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: var(--spacing-xl);
+            align-items: start;
+        }
+        
+        .filters-sidebar {
+            background-color: var(--white);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-lg);
+            box-shadow: var(--shadow-sm);
+            position: sticky;
+            top: 90px;
+        }
+        
+        .filters-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: var(--spacing-lg);
+            color: var(--gray-800);
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+        }
+        
+        .filter-group {
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        .filter-label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: var(--spacing-sm);
+            color: var(--gray-700);
+            font-size: 0.9rem;
+        }
+        
+        .filter-input,
+        .filter-select {
+            width: 100%;
+            padding: var(--spacing-sm);
+            border: 1px solid var(--gray-300);
+            border-radius: var(--radius-md);
+            font-size: 0.95rem;
+            transition: border-color var(--transition-fast);
+        }
+        
+        .filter-input:focus,
+        .filter-select:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+        
+        .btn-reset {
+            width: 100%;
+            padding: var(--spacing-sm);
+            background-color: var(--gray-200);
+            color: var(--gray-700);
+            border: none;
+            border-radius: var(--radius-md);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+        }
+        
+        .btn-reset:hover {
+            background-color: var(--gray-300);
+        }
+        
+        .jobs-main {
+            min-height: 500px;
+        }
+        
+        .jobs-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--spacing-lg);
+            flex-wrap: wrap;
+            gap: var(--spacing-md);
+        }
+        
+        .jobs-count {
+            font-size: 1.125rem;
+            color: var(--gray-700);
+        }
+        
+        .jobs-count strong {
+            color: var(--primary-color);
+            font-size: 1.5rem;
+        }
+        
+        .sort-group {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+        }
+        
+        .sort-label {
+            font-weight: 600;
+            color: var(--gray-700);
+            font-size: 0.9rem;
+        }
+        
+        .sort-select {
+            padding: var(--spacing-xs) var(--spacing-sm);
+            border: 1px solid var(--gray-300);
+            border-radius: var(--radius-md);
+            font-size: 0.95rem;
+            cursor: pointer;
+        }
+        
+        .no-results {
+            text-align: center;
+            padding: var(--spacing-xxl);
+            background-color: var(--white);
+            border-radius: var(--radius-lg);
+            color: var(--gray-600);
+        }
+        
+        .no-results i {
+            font-size: 4rem;
+            color: var(--gray-400);
+            margin-bottom: var(--spacing-md);
+            display: block;
+        }
+        
+        /* Mobile Responsive */
+        @media (max-width: 992px) {
+            .jobs-layout {
+                grid-template-columns: 1fr;
+            }
+            
+            .filters-sidebar {
+                position: static;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .page-title {
+                font-size: 1.5rem;
+            }
+            
+            .jobs-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .sort-group {
+                width: 100%;
+                justify-content: space-between;
+            }
+        }
+    </style>
+</head>
+<body class="jobs-page">
+    <!-- Header / Navigation -->
+    <header class="header">
+        <nav class="nav-container">
+            <div class="nav-logo">
+                <a href="index.html">
+                    <i class="fas fa-hard-hat"></i>
+                    <span>建設マッチング</span>
+                </a>
+            </div>
+            <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html">ホーム</a></li>
+                <li><a href="jobs.html" class="active">求人一覧</a></li>
+                <li><a href="for-companies.html">企業の方へ</a></li>
+                <li><a href="for-jobseekers.html">求職者の方へ</a></li>
+                <li><a href="#" class="btn-login">ログイン</a></li>
+                <li><a href="#" class="btn-register">新規登録</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Page Header -->
+    <div class="page-header">
+        <div class="container">
+            <h1 class="page-title">求人一覧</h1>
+            <p class="page-subtitle">あなたに最適な建設現場監督の求人を見つけよう</p>
+        </div>
+    </div>
+
+    <!-- Jobs Content -->
+    <div class="jobs-container">
+        <div class="jobs-layout">
+            <!-- Filters Sidebar -->
+            <aside class="filters-sidebar">
+                <h2 class="filters-title">
+                    <i class="fas fa-filter"></i>
+                    検索条件
+                </h2>
+                
+                <form id="searchForm">
+                    <!-- キーワード検索 -->
+                    <div class="filter-group">
+                        <label class="filter-label" for="keywordInput">
+                            <i class="fas fa-search"></i> キーワード
+                        </label>
+                        <input 
+                            type="text" 
+                            id="keywordInput" 
+                            class="filter-input" 
+                            placeholder="職種、企業名など"
+                        >
+                    </div>
+                    
+                    <!-- 勤務地 -->
+                    <div class="filter-group">
+                        <label class="filter-label" for="locationFilter">
+                            <i class="fas fa-map-marker-alt"></i> 勤務地
+                        </label>
+                        <select id="locationFilter" class="filter-select">
+                            <option value="">すべての地域</option>
+                            <option value="東京都">東京都</option>
+                            <option value="神奈川県">神奈川県</option>
+                            <option value="埼玉県">埼玉県</option>
+                            <option value="千葉県">千葉県</option>
+                            <option value="大阪府">大阪府</option>
+                            <option value="愛知県">愛知県</option>
+                            <option value="福岡県">福岡県</option>
+                            <option value="北海道">北海道</option>
+                            <option value="京都府">京都府</option>
+                            <option value="その他">その他</option>
+                        </select>
+                    </div>
+                    
+                    <!-- 雇用形態 -->
+                    <div class="filter-group">
+                        <label class="filter-label" for="employmentTypeFilter">
+                            <i class="fas fa-briefcase"></i> 雇用形態
+                        </label>
+                        <select id="employmentTypeFilter" class="filter-select">
+                            <option value="">すべて</option>
+                            <option value="正社員">正社員</option>
+                            <option value="契約社員">契約社員</option>
+                            <option value="派遣社員">派遣社員</option>
+                            <option value="業務委託">業務委託</option>
+                        </select>
+                    </div>
+                    
+                    <!-- 必要経験年数 -->
+                    <div class="filter-group">
+                        <label class="filter-label" for="experienceFilter">
+                            <i class="fas fa-user-clock"></i> 必要経験年数
+                        </label>
+                        <select id="experienceFilter" class="filter-select">
+                            <option value="">指定なし</option>
+                            <option value="未経験歓迎">未経験歓迎</option>
+                            <option value="1年以上">1年以上</option>
+                            <option value="2年以上">2年以上</option>
+                            <option value="3年以上">3年以上</option>
+                            <option value="5年以上">5年以上</option>
+                            <option value="10年以上">10年以上</option>
+                        </select>
+                    </div>
+                    
+                    <!-- 検索ボタン -->
+                    <button type="submit" class="btn-search" style="width: 100%; margin-bottom: var(--spacing-md);">
+                        <i class="fas fa-search"></i> 検索
+                    </button>
+                    
+                    <!-- リセットボタン -->
+                    <button type="button" class="btn-reset" onclick="resetFilters()">
+                        <i class="fas fa-redo"></i> 条件をリセット
+                    </button>
+                </form>
+            </aside>
+
+            <!-- Jobs List -->
+            <main class="jobs-main">
+                <!-- Jobs Header -->
+                <div class="jobs-header">
+                    <div class="jobs-count">
+                        該当求人数: <strong id="jobsCount">15</strong>
+                    </div>
+                    
+                    <div class="sort-group">
+                        <label class="sort-label" for="sortFilter">並び替え:</label>
+                        <select id="sortFilter" class="sort-select">
+                            <option value="newest">新着順</option>
+                            <option value="salary-high">給与が高い順</option>
+                            <option value="salary-low">給与が低い順</option>
+                            <option value="popular">人気順</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <!-- Jobs Grid -->
+                <div class="jobs-grid" id="jobsList">
+                    <!-- Jobs will be loaded via JavaScript -->
+                    <div class="loading">求人情報を読み込んでいます...</div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4 class="footer-title">建設マッチングについて</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">サービス概要</a></li>
+                        <li><a href="#">運営会社</a></li>
+                        <li><a href="#">お問い合わせ</a></li>
+                        <li><a href="#">よくある質問</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4 class="footer-title">求職者の方へ</h4>
+                    <ul class="footer-links">
+                        <li><a href="for-jobseekers.html">会員登録</a></li>
+                        <li><a href="jobs.html">求人検索</a></li>
+                        <li><a href="#">転職ガイド</a></li>
+                        <li><a href="#">履歴書の書き方</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4 class="footer-title">企業の方へ</h4>
+                    <ul class="footer-links">
+                        <li><a href="for-companies.html">求人掲載</a></li>
+                        <li><a href="#">料金プラン</a></li>
+                        <li><a href="#">採用事例</a></li>
+                        <li><a href="#">採用ノウハウ</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4 class="footer-title">法的情報</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">利用規約</a></li>
+                        <li><a href="#">プライバシーポリシー</a></li>
+                        <li><a href="#">特定商取引法</a></li>
+                        <li><a href="#">サイトマップ</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p class="copyright">&copy; 2024 建設現場監督マッチング. All rights reserved.</p>
+                <div class="social-links">
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/jobs-data.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        // リセット機能
+        function resetFilters() {
+            document.getElementById('keywordInput').value = '';
+            document.getElementById('locationFilter').value = '';
+            document.getElementById('employmentTypeFilter').value = '';
+            document.getElementById('experienceFilter').value = '';
+            performSearch();
+        }
+    </script>
+</body>
+</html>

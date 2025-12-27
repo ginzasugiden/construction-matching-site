@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>企業の方へ - 求人掲載のご案内 | 建設現場監督マッチング</title>
+    <meta name="description" content="優秀な現場監督を採用したい企業様向けのサービスのご案内。効率的な採用をサポートします。">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    
+    <style>
+        /* Companies Page Specific Styles */
+        .companies-hero {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+            color: var(--white);
+            padding: var(--spacing-xxl) var(--spacing-md);
+            text-align: center;
+        }
+        
+        .companies-hero-title {
+            font-size: 2.5rem;
+            font-weight: 900;
+            margin-bottom: var(--spacing-md);
+            line-height: 1.2;
+        }
+        
+        .companies-hero-subtitle {
+            font-size: 1.25rem;
+            margin-bottom: var(--spacing-xl);
+            opacity: 0.95;
+        }
+        
+        .benefits-section {
+            padding: var(--spacing-xxl) 0;
+            background-color: var(--white);
+        }
+        
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--spacing-lg);
+            margin-top: var(--spacing-xl);
+        }
+        
+        .benefit-card {
+            padding: var(--spacing-xl);
+            border: 2px solid var(--gray-200);
+            border-radius: var(--radius-lg);
+            text-align: center;
+            transition: all var(--transition-normal);
+        }
+        
+        .benefit-card:hover {
+            border-color: var(--primary-color);
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .benefit-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto var(--spacing-md);
+        }
+        
+        .benefit-icon i {
+            font-size: 2rem;
+            color: var(--white);
+        }
+        
+        .benefit-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: var(--spacing-sm);
+            color: var(--gray-800);
+        }
+        
+        .benefit-description {
+            color: var(--gray-600);
+            line-height: 1.8;
+        }
+        
+        .pricing-section {
+            padding: var(--spacing-xxl) 0;
+            background-color: var(--gray-50);
+        }
+        
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--spacing-xl);
+            margin-top: var(--spacing-xl);
+        }
+        
+        .pricing-card {
+            background-color: var(--white);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-xl);
+            box-shadow: var(--shadow-md);
+            text-align: center;
+            position: relative;
+            transition: all var(--transition-normal);
+        }
+        
+        .pricing-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-xl);
+        }
+        
+        .pricing-card.recommended {
+            border: 3px solid var(--secondary-color);
+        }
+        
+        .recommended-badge {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--secondary-color);
+            color: var(--white);
+            padding: var(--spacing-xs) var(--spacing-lg);
+            border-radius: var(--radius-md);
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+        
+        .plan-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--gray-800);
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .plan-price {
+            font-size: 3rem;
+            font-weight: 900;
+            color: var(--primary-color);
+            margin-bottom: var(--spacing-xs);
+        }
+        
+        .plan-price-unit {
+            font-size: 1rem;
+            color: var(--gray-600);
+            font-weight: 400;
+        }
+        
+        .plan-features {
+            list-style: none;
+            margin: var(--spacing-xl) 0;
+            text-align: left;
+        }
+        
+        .plan-features li {
+            padding: var(--spacing-sm) 0;
+            display: flex;
+            align-items: start;
+            gap: var(--spacing-sm);
+        }
+        
+        .plan-features i {
+            color: var(--success);
+            margin-top: 4px;
+        }
+        
+        .btn-plan {
+            width: 100%;
+            padding: var(--spacing-md);
+            background-color: var(--primary-color);
+            color: var(--white);
+            border: none;
+            border-radius: var(--radius-md);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+        }
+        
+        .btn-plan:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+        
+        .flow-section {
+            padding: var(--spacing-xxl) 0;
+            background-color: var(--white);
+        }
+        
+        .flow-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--spacing-xl);
+            margin-top: var(--spacing-xl);
+        }
+        
+        .flow-item {
+            text-align: center;
+            position: relative;
+        }
+        
+        .flow-number {
+            width: 60px;
+            height: 60px;
+            background-color: var(--primary-color);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 0 auto var(--spacing-md);
+        }
+        
+        .flow-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+            margin-bottom: var(--spacing-sm);
+            color: var(--gray-800);
+        }
+        
+        .flow-description {
+            color: var(--gray-600);
+            line-height: 1.8;
+        }
+        
+        .contact-section {
+            padding: var(--spacing-xxl) 0;
+            background-color: var(--gray-50);
+        }
+        
+        .contact-form-container {
+            max-width: 700px;
+            margin: var(--spacing-xl) auto 0;
+            background-color: var(--white);
+            padding: var(--spacing-xl);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .form-group {
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        .form-label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: var(--spacing-sm);
+            color: var(--gray-800);
+        }
+        
+        .form-label.required::after {
+            content: " *";
+            color: var(--danger);
+        }
+        
+        .form-input,
+        .form-select,
+        .form-textarea {
+            width: 100%;
+            padding: var(--spacing-sm) var(--spacing-md);
+            border: 1px solid var(--gray-300);
+            border-radius: var(--radius-md);
+            font-size: 1rem;
+            transition: border-color var(--transition-fast);
+        }
+        
+        .form-input:focus,
+        .form-select:focus,
+        .form-textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+        
+        .form-textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+        
+        .btn-submit {
+            width: 100%;
+            padding: var(--spacing-md);
+            background-color: var(--secondary-color);
+            color: var(--white);
+            border: none;
+            border-radius: var(--radius-md);
+            font-size: 1.125rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+        }
+        
+        .btn-submit:hover {
+            background-color: var(--secondary-dark);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+        
+        @media (max-width: 768px) {
+            .companies-hero-title {
+                font-size: 1.75rem;
+            }
+            
+            .plan-price {
+                font-size: 2.5rem;
+            }
+            
+            .pricing-grid,
+            .benefits-grid,
+            .flow-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header / Navigation -->
+    <header class="header">
+        <nav class="nav-container">
+            <div class="nav-logo">
+                <a href="index.html">
+                    <i class="fas fa-hard-hat"></i>
+                    <span>建設マッチング</span>
+                </a>
+            </div>
+            <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html">ホーム</a></li>
+                <li><a href="jobs.html">求人一覧</a></li>
+                <li><a href="for-companies.html" class="active">企業の方へ</a></li>
+                <li><a href="for-jobseekers.html">求職者の方へ</a></li>
+                <li><a href="#" class="btn-login">ログイン</a></li>
+                <li><a href="#" class="btn-register">新規登録</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="companies-hero">
+        <div class="container">
+            <h1 class="companies-hero-title">
+                優秀な現場監督をお探しですか？
+            </h1>
+            <p class="companies-hero-subtitle">
+                建設業界専門のマッチングサービスで、<br>
+                最適な人材との出会いを実現します
+            </p>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="benefits-section">
+        <div class="container">
+            <h2 class="section-title">サービスのメリット</h2>
+            <p class="section-subtitle">企業様の採用活動を強力にサポート</p>
+            
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3 class="benefit-title">質の高い人材プール</h3>
+                    <p class="benefit-description">
+                        建設業界専門だからこそ、現場監督経験者や有資格者が多数登録。
+                        即戦力となる人材と出会えます。
+                    </p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h3 class="benefit-title">採用期間の短縮</h3>
+                    <p class="benefit-description">
+                        マッチング機能により、条件に合った求職者に効率的にアプローチ。
+                        平均採用期間を30%短縮します。
+                    </p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-yen-sign"></i>
+                    </div>
+                    <h3 class="benefit-title">コストパフォーマンス</h3>
+                    <p class="benefit-description">
+                        人材紹介会社と比べて大幅にコスト削減。
+                        成功報酬なしで何名でも採用可能です。
+                    </p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <h3 class="benefit-title">専任サポート</h3>
+                    <p class="benefit-description">
+                        専任のコンサルタントが採用活動を全面サポート。
+                        求人原稿作成から面接調整まで対応します。
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="pricing-section">
+        <div class="container">
+            <h2 class="section-title">料金プラン</h2>
+            <p class="section-subtitle">ニーズに合わせて選べる3つのプラン</p>
+            
+            <div class="pricing-grid">
+                <!-- ライトプラン -->
+                <div class="pricing-card">
+                    <h3 class="plan-name">ライトプラン</h3>
+                    <div class="plan-price">
+                        ¥50,000
+                        <span class="plan-price-unit">/ 月</span>
+                    </div>
+                    <ul class="plan-features">
+                        <li>
+                            <i class="fas fa-check-circle"></i>
+                            <span>求人掲載数: 1件</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-check-circle"></i>
+                            <span>掲載期間: 30日間</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-check-circle"></i>
+                            <span>応募者管理機能</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-check-circle"></i>
+                            <span>基本サポート</span>
+                        </li>
+                    </ul>
+                    <button class="btn-plan" onclick="scrollToContact()">お問い合わせ</button>
+                </div>
+                
+                <!-- スタンダードプラン（推奨） -->
+                <div class="pricing-card recommended">
+                    <div class="recommended-badge">おすすめ</div>
+                    <h3 class="plan-name">スタンダードプラン</h3>
+                    <div class="plan-price">
+                        ¥120,000
+                        <span class="plan-price-unit">/ 月</span>
+                    </div>
+                    <ul class="plan-features">
+                        <li>
+                            <i class="fas fa-check-circle"></i>
+                            <span>求人掲載数: 3件</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-check-circle"></i>
+                            <span>掲載期間: 60日間</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-check-circle"></i>
+                            <span>応募者管理機能</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-check-circle"></i>
+                            <span>優先表示機能</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-check-circle"></i>
+                            <span>スカウト機能</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-check-circle"></i>
+                            <span>専任サポート</span>
+                        </li>
+                    </ul>
+                    <button class="btn-plan" onclick="scrollToContact()">お問い合わせ</button>
+                </div>
+                
+                <!-- プレミアムプラン -->
+                <div class="pricing-card">
+                    <h3 class="plan-name">プレミアムプラン</h3>
+                    <div class="plan-price">
+                        ¥250,000
+                        <span class="plan-price-unit">/ 月</span>
+                    </div>
+                    <ul class="plan-features">
+                        <li>
+                            <i class="fas fa-check-circle"></i>
+                            <span>求人掲載数: 無制限</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-check-circle"></i>
+                            <span>掲載期間: 90日間</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-check-circle"></i>
+                            <span>応募者管理機能</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-check-circle"></i>
+                            <span>トップ表示機能</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-check-circle"></i>
+                            <span>スカウト無制限</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-check-circle"></i>
+                            <span>専任コンサルタント</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-check-circle"></i>
+                            <span>採用代行サービス</span>
+                        </li>
+                    </ul>
+                    <button class="btn-plan" onclick="scrollToContact()">お問い合わせ</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Flow Section -->
+    <section class="flow-section">
+        <div class="container">
+            <h2 class="section-title">ご利用の流れ</h2>
+            <p class="section-subtitle">簡単4ステップで採用活動を開始</p>
+            
+            <div class="flow-grid">
+                <div class="flow-item">
+                    <div class="flow-number">1</div>
+                    <h3 class="flow-title">お問い合わせ</h3>
+                    <p class="flow-description">
+                        お問い合わせフォームまたはお電話にて、
+                        採用ニーズをお聞かせください。
+                    </p>
+                </div>
+                
+                <div class="flow-item">
+                    <div class="flow-number">2</div>
+                    <h3 class="flow-title">プラン選択・契約</h3>
+                    <p class="flow-description">
+                        ご要望に合わせて最適なプランをご提案。
+                        契約手続きを進めます。
+                    </p>
+                </div>
+                
+                <div class="flow-item">
+                    <div class="flow-number">3</div>
+                    <h3 class="flow-title">求人掲載</h3>
+                    <p class="flow-description">
+                        求人原稿を作成し、掲載開始。
+                        専任担当者がサポートします。
+                    </p>
+                </div>
+                
+                <div class="flow-item">
+                    <div class="flow-number">4</div>
+                    <h3 class="flow-title">採用活動</h3>
+                    <p class="flow-description">
+                        応募者との面接調整や、
+                        スカウト機能で積極的にアプローチ。
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section" id="contact">
+        <div class="container">
+            <h2 class="section-title">お問い合わせ</h2>
+            <p class="section-subtitle">まずはお気軽にご相談ください</p>
+            
+            <div class="contact-form-container">
+                <form id="companyContactForm">
+                    <div class="form-group">
+                        <label class="form-label required" for="companyName">企業名</label>
+                        <input type="text" id="companyName" name="companyName" class="form-input" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label required" for="contactName">ご担当者名</label>
+                        <input type="text" id="contactName" name="contactName" class="form-input" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label required" for="email">メールアドレス</label>
+                        <input type="email" id="email" name="email" class="form-input" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label required" for="phone">電話番号</label>
+                        <input type="tel" id="phone" name="phone" class="form-input" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="planInterest">ご興味のあるプラン</label>
+                        <select id="planInterest" name="planInterest" class="form-select">
+                            <option value="">選択してください</option>
+                            <option value="light">ライトプラン</option>
+                            <option value="standard">スタンダードプラン</option>
+                            <option value="premium">プレミアムプラン</option>
+                            <option value="undecided">未定・相談したい</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="message">お問い合わせ内容</label>
+                        <textarea id="message" name="message" class="form-textarea" placeholder="採用ニーズや質問事項などをご記入ください"></textarea>
+                    </div>
+                    
+                    <button type="submit" class="btn-submit">
+                        <i class="fas fa-paper-plane"></i> 送信する
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4 class="footer-title">建設マッチングについて</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">サービス概要</a></li>
+                        <li><a href="#">運営会社</a></li>
+                        <li><a href="#">お問い合わせ</a></li>
+                        <li><a href="#">よくある質問</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4 class="footer-title">求職者の方へ</h4>
+                    <ul class="footer-links">
+                        <li><a href="for-jobseekers.html">会員登録</a></li>
+                        <li><a href="jobs.html">求人検索</a></li>
+                        <li><a href="#">転職ガイド</a></li>
+                        <li><a href="#">履歴書の書き方</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4 class="footer-title">企業の方へ</h4>
+                    <ul class="footer-links">
+                        <li><a href="for-companies.html">求人掲載</a></li>
+                        <li><a href="#">料金プラン</a></li>
+                        <li><a href="#">採用事例</a></li>
+                        <li><a href="#">採用ノウハウ</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4 class="footer-title">法的情報</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">利用規約</a></li>
+                        <li><a href="#">プライバシーポリシー</a></li>
+                        <li><a href="#">特定商取引法</a></li>
+                        <li><a href="#">サイトマップ</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p class="copyright">&copy; 2024 建設現場監督マッチング. All rights reserved.</p>
+                <div class="social-links">
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/main.js"></script>
+    <script>
+        function scrollToContact() {
+            document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>

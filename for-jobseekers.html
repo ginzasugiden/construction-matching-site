@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>求職者の方へ - 無料会員登録 | 建設現場監督マッチング</title>
+    <meta name="description" content="建設現場監督の転職・求人をお探しの方へ。無料会員登録で最適な職場が見つかります。">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    
+    <style>
+        /* Jobseekers Page Specific Styles */
+        .jobseekers-hero {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+            color: var(--white);
+            padding: var(--spacing-xxl) var(--spacing-md);
+            text-align: center;
+        }
+        
+        .jobseekers-hero-title {
+            font-size: 2.5rem;
+            font-weight: 900;
+            margin-bottom: var(--spacing-md);
+            line-height: 1.2;
+        }
+        
+        .jobseekers-hero-subtitle {
+            font-size: 1.25rem;
+            margin-bottom: var(--spacing-xl);
+            opacity: 0.95;
+        }
+        
+        .advantages-section {
+            padding: var(--spacing-xxl) 0;
+            background-color: var(--white);
+        }
+        
+        .advantages-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--spacing-lg);
+            margin-top: var(--spacing-xl);
+        }
+        
+        .advantage-card {
+            padding: var(--spacing-xl);
+            background-color: var(--gray-50);
+            border-radius: var(--radius-lg);
+            transition: all var(--transition-normal);
+        }
+        
+        .advantage-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .advantage-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .advantage-icon i {
+            font-size: 1.75rem;
+            color: var(--white);
+        }
+        
+        .advantage-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+            margin-bottom: var(--spacing-sm);
+            color: var(--gray-800);
+        }
+        
+        .advantage-description {
+            color: var(--gray-600);
+            line-height: 1.8;
+            font-size: 0.95rem;
+        }
+        
+        .services-section {
+            padding: var(--spacing-xxl) 0;
+            background-color: var(--gray-50);
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--spacing-xl);
+            margin-top: var(--spacing-xl);
+        }
+        
+        .service-card {
+            background-color: var(--white);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-xl);
+            box-shadow: var(--shadow-sm);
+            border-left: 4px solid var(--primary-color);
+        }
+        
+        .service-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: var(--spacing-md);
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+        }
+        
+        .service-features {
+            list-style: none;
+        }
+        
+        .service-features li {
+            padding: var(--spacing-sm) 0;
+            display: flex;
+            align-items: start;
+            gap: var(--spacing-sm);
+            color: var(--gray-700);
+        }
+        
+        .service-features i {
+            color: var(--success);
+            margin-top: 4px;
+        }
+        
+        .register-section {
+            padding: var(--spacing-xxl) 0;
+            background-color: var(--white);
+        }
+        
+        .register-form-container {
+            max-width: 700px;
+            margin: var(--spacing-xl) auto 0;
+            background-color: var(--gray-50);
+            padding: var(--spacing-xl);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--spacing-md);
+        }
+        
+        .form-group {
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        .form-label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: var(--spacing-sm);
+            color: var(--gray-800);
+        }
+        
+        .form-label.required::after {
+            content: " *";
+            color: var(--danger);
+        }
+        
+        .form-input,
+        .form-select,
+        .form-textarea {
+            width: 100%;
+            padding: var(--spacing-sm) var(--spacing-md);
+            border: 1px solid var(--gray-300);
+            border-radius: var(--radius-md);
+            font-size: 1rem;
+            background-color: var(--white);
+            transition: border-color var(--transition-fast);
+        }
+        
+        .form-input:focus,
+        .form-select:focus,
+        .form-textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+        
+        .form-textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+        
+        .form-checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+        }
+        
+        .form-checkbox {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+        
+        .btn-register-submit {
+            width: 100%;
+            padding: var(--spacing-md);
+            background-color: var(--secondary-color);
+            color: var(--white);
+            border: none;
+            border-radius: var(--radius-md);
+            font-size: 1.125rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+        }
+        
+        .btn-register-submit:hover {
+            background-color: var(--secondary-dark);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .success-stories-section {
+            padding: var(--spacing-xxl) 0;
+            background-color: var(--gray-50);
+        }
+        
+        .stories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--spacing-lg);
+            margin-top: var(--spacing-xl);
+        }
+        
+        .story-card {
+            background-color: var(--white);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-xl);
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .story-profile {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .story-avatar {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+        
+        .story-info h4 {
+            font-weight: 600;
+            color: var(--gray-800);
+            margin-bottom: var(--spacing-xs);
+        }
+        
+        .story-info p {
+            color: var(--gray-600);
+            font-size: 0.9rem;
+        }
+        
+        .story-content {
+            color: var(--gray-700);
+            line-height: 1.8;
+            font-style: italic;
+        }
+        
+        @media (max-width: 768px) {
+            .jobseekers-hero-title {
+                font-size: 1.75rem;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .advantages-grid,
+            .services-grid,
+            .stories-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header / Navigation -->
+    <header class="header">
+        <nav class="nav-container">
+            <div class="nav-logo">
+                <a href="index.html">
+                    <i class="fas fa-hard-hat"></i>
+                    <span>建設マッチング</span>
+                </a>
+            </div>
+            <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html">ホーム</a></li>
+                <li><a href="jobs.html">求人一覧</a></li>
+                <li><a href="for-companies.html">企業の方へ</a></li>
+                <li><a href="for-jobseekers.html" class="active">求職者の方へ</a></li>
+                <li><a href="#" class="btn-login">ログイン</a></li>
+                <li><a href="#" class="btn-register">新規登録</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="jobseekers-hero">
+        <div class="container">
+            <h1 class="jobseekers-hero-title">
+                あなたの経験を活かせる<br>
+                最適な職場を見つけよう
+            </h1>
+            <p class="jobseekers-hero-subtitle">
+                建設現場監督専門のマッチングサービスで<br>
+                理想のキャリアを実現しませんか？
+            </p>
+            <a href="#register" class="btn-cta btn-secondary" style="display: inline-flex;">
+                <i class="fas fa-user-plus"></i> 無料会員登録はこちら
+            </a>
+        </div>
+    </section>
+
+    <!-- Advantages Section -->
+    <section class="advantages-section">
+        <div class="container">
+            <h2 class="section-title">選ばれる理由</h2>
+            <p class="section-subtitle">建設現場監督に特化したサービスだから実現できること</p>
+            
+            <div class="advantages-grid">
+                <div class="advantage-card">
+                    <div class="advantage-icon">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <h3 class="advantage-title">専門性の高い求人</h3>
+                    <p class="advantage-description">
+                        建設業界・現場監督に特化した求人のみを掲載。
+                        あなたの経験や資格を最大限に活かせる職場が見つかります。
+                    </p>
+                </div>
+                
+                <div class="advantage-card">
+                    <div class="advantage-icon">
+                        <i class="fas fa-user-tie"></i>
+                    </div>
+                    <h3 class="advantage-title">キャリアアドバイザー</h3>
+                    <p class="advantage-description">
+                        業界に精通したキャリアアドバイザーが、
+                        あなたの転職活動を徹底サポートします。
+                    </p>
+                </div>
+                
+                <div class="advantage-card">
+                    <div class="advantage-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3 class="advantage-title">スピーディな対応</h3>
+                    <p class="advantage-description">
+                        応募から面接まで平均3日以内。
+                        スピーディな選考プロセスで早期転職を実現します。
+                    </p>
+                </div>
+                
+                <div class="advantage-card">
+                    <div class="advantage-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3 class="advantage-title">安心・安全</h3>
+                    <p class="advantage-description">
+                        厳選された企業のみを掲載。
+                        個人情報の管理も徹底しています。
+                    </p>
+                </div>
+                
+                <div class="advantage-card">
+                    <div class="advantage-icon">
+                        <i class="fas fa-yen-sign"></i>
+                    </div>
+                    <h3 class="advantage-title">完全無料</h3>
+                    <p class="advantage-description">
+                        会員登録から採用まで、すべてのサービスを
+                        完全無料でご利用いただけます。
+                    </p>
+                </div>
+                
+                <div class="advantage-card">
+                    <div class="advantage-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3 class="advantage-title">スマホ対応</h3>
+                    <p class="advantage-description">
+                        スマートフォンから簡単に求人検索や応募が可能。
+                        いつでもどこでも転職活動ができます。
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services-section">
+        <div class="container">
+            <h2 class="section-title">サービス内容</h2>
+            <p class="section-subtitle">あなたの転職活動を成功に導く充実のサービス</p>
+            
+            <div class="services-grid">
+                <div class="service-card">
+                    <h3 class="service-title">
+                        <i class="fas fa-search"></i>
+                        求人検索機能
+                    </h3>
+                    <ul class="service-features">
+                        <li>
+                            <i class="fas fa-check"></i>
+                            <span>勤務地、給与、経験年数など詳細条件で検索</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-check"></i>
+                            <span>保有資格に合わせた求人推薦</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-check"></i>
+                            <span>お気に入り機能で気になる求人を保存</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-check"></i>
+                            <span>新着求人の自動通知</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="service-card">
+                    <h3 class="service-title">
+                        <i class="fas fa-paper-plane"></i>
+                        簡単応募システム
+                    </h3>
+                    <ul class="service-features">
+                        <li>
+                            <i class="fas fa-check"></i>
+                            <span>プロフィールを登録すればワンクリックで応募</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-check"></i>
+                            <span>応募履歴の一元管理</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-check"></i>
+                            <span>企業からのスカウト機能</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-check"></i>
+                            <span>選考状況のリアルタイム確認</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="service-card">
+                    <h3 class="service-title">
+                        <i class="fas fa-user-friends"></i>
+                        転職サポート
+                    </h3>
+                    <ul class="service-features">
+                        <li>
+                            <i class="fas fa-check"></i>
+                            <span>専任キャリアアドバイザーによる相談</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-check"></i>
+                            <span>履歴書・職務経歴書の添削サービス</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-check"></i>
+                            <span>面接対策・アドバイス</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-check"></i>
+                            <span>給与交渉のサポート</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Register Section -->
+    <section class="register-section" id="register">
+        <div class="container">
+            <h2 class="section-title">無料会員登録</h2>
+            <p class="section-subtitle">1分で簡単登録。今すぐ理想の職場を探そう</p>
+            
+            <div class="register-form-container">
+                <form id="jobseekerRegisterForm">
+                    <!-- 基本情報 -->
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label required" for="lastName">姓</label>
+                            <input type="text" id="lastName" name="lastName" class="form-input" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label required" for="firstName">名</label>
+                            <input type="text" id="firstName" name="firstName" class="form-input" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label required" for="lastNameKana">セイ</label>
+                            <input type="text" id="lastNameKana" name="lastNameKana" class="form-input" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label required" for="firstNameKana">メイ</label>
+                            <input type="text" id="firstNameKana" name="firstNameKana" class="form-input" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label required" for="email">メールアドレス</label>
+                        <input type="email" id="email" name="email" class="form-input" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label required" for="phone">電話番号</label>
+                        <input type="tel" id="phone" name="phone" class="form-input" placeholder="例: 090-1234-5678" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label required" for="password">パスワード</label>
+                        <input type="password" id="password" name="password" class="form-input" placeholder="8文字以上" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label required" for="confirmPassword">パスワード（確認）</label>
+                        <input type="password" id="confirmPassword" name="confirmPassword" class="form-input" required>
+                    </div>
+                    
+                    <!-- プロフィール情報 -->
+                    <div class="form-group">
+                        <label class="form-label" for="currentPosition">現在の職種</label>
+                        <select id="currentPosition" name="currentPosition" class="form-select">
+                            <option value="">選択してください</option>
+                            <option value="現場監督">現場監督</option>
+                            <option value="工事主任">工事主任</option>
+                            <option value="現場代理人">現場代理人</option>
+                            <option value="施工管理">施工管理</option>
+                            <option value="その他">その他</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="experience">経験年数</label>
+                        <select id="experience" name="experience" class="form-select">
+                            <option value="">選択してください</option>
+                            <option value="未経験">未経験</option>
+                            <option value="1年未満">1年未満</option>
+                            <option value="1-3年">1～3年</option>
+                            <option value="3-5年">3～5年</option>
+                            <option value="5-10年">5～10年</option>
+                            <option value="10年以上">10年以上</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="licenses">保有資格</label>
+                        <textarea id="licenses" name="licenses" class="form-textarea" placeholder="例: 1級建築施工管理技士、2級土木施工管理技士"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="preferredLocation">希望勤務地</label>
+                        <select id="preferredLocation" name="preferredLocation" class="form-select">
+                            <option value="">選択してください</option>
+                            <option value="東京都">東京都</option>
+                            <option value="神奈川県">神奈川県</option>
+                            <option value="埼玉県">埼玉県</option>
+                            <option value="千葉県">千葉県</option>
+                            <option value="大阪府">大阪府</option>
+                            <option value="愛知県">愛知県</option>
+                            <option value="福岡県">福岡県</option>
+                            <option value="その他">その他</option>
+                        </select>
+                    </div>
+                    
+                    <!-- 利用規約 -->
+                    <div class="form-group">
+                        <div class="form-checkbox-group">
+                            <input type="checkbox" id="agreeTerms" name="agreeTerms" class="form-checkbox" required>
+                            <label for="agreeTerms">
+                                <a href="#" style="color: var(--primary-color);">利用規約</a>と
+                                <a href="#" style="color: var(--primary-color);">プライバシーポリシー</a>に同意する
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="btn-register-submit">
+                        <i class="fas fa-user-plus"></i> 無料会員登録
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Success Stories Section -->
+    <section class="success-stories-section">
+        <div class="container">
+            <h2 class="section-title">転職成功事例</h2>
+            <p class="section-subtitle">実際にサービスを利用して転職に成功した方々の声</p>
+            
+            <div class="stories-grid">
+                <div class="story-card">
+                    <div class="story-profile">
+                        <div class="story-avatar">A</div>
+                        <div class="story-info">
+                            <h4>Aさん（35歳）</h4>
+                            <p>中堅ゼネコン → 大手ゼネコン</p>
+                        </div>
+                    </div>
+                    <p class="story-content">
+                        「キャリアアップを目指して転職活動を始めました。
+                        専任アドバイザーのサポートで、大手ゼネコンへの転職に成功。
+                        給与も20%アップし、大変満足しています。」
+                    </p>
+                </div>
+                
+                <div class="story-card">
+                    <div class="story-profile">
+                        <div class="story-avatar">B</div>
+                        <div class="story-info">
+                            <h4>Bさん（42歳）</h4>
+                            <p>地方建設会社 → 首都圏企業</p>
+                        </div>
+                    </div>
+                    <p class="story-content">
+                        「地方から東京への転職は不安でしたが、
+                        希望条件に合う求人をすぐに見つけることができました。
+                        面接対策も丁寧で、スムーズに転職できました。」
+                    </p>
+                </div>
+                
+                <div class="story-card">
+                    <div class="story-profile">
+                        <div class="story-avatar">C</div>
+                        <div class="story-info">
+                            <h4>Cさん（28歳）</h4>
+                            <p>下請け企業 → 元請け企業</p>
+                        </div>
+                    </div>
+                    <p class="story-content">
+                        「元請け企業で働きたいという夢を実現できました。
+                        建設業界専門のサービスなので、業界特有の事情を
+                        理解してもらえて心強かったです。」
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4 class="footer-title">建設マッチングについて</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">サービス概要</a></li>
+                        <li><a href="#">運営会社</a></li>
+                        <li><a href="#">お問い合わせ</a></li>
+                        <li><a href="#">よくある質問</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4 class="footer-title">求職者の方へ</h4>
+                    <ul class="footer-links">
+                        <li><a href="for-jobseekers.html">会員登録</a></li>
+                        <li><a href="jobs.html">求人検索</a></li>
+                        <li><a href="#">転職ガイド</a></li>
+                        <li><a href="#">履歴書の書き方</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4 class="footer-title">企業の方へ</h4>
+                    <ul class="footer-links">
+                        <li><a href="for-companies.html">求人掲載</a></li>
+                        <li><a href="#">料金プラン</a></li>
+                        <li><a href="#">採用事例</a></li>
+                        <li><a href="#">採用ノウハウ</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4 class="footer-title">法的情報</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">利用規約</a></li>
+                        <li><a href="#">プライバシーポリシー</a></li>
+                        <li><a href="#">特定商取引法</a></li>
+                        <li><a href="#">サイトマップ</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p class="copyright">&copy; 2024 建設現場監督マッチング. All rights reserved.</p>
+                <div class="social-links">
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/main.js"></script>
+</body>
+</html>
