@@ -1,0 +1,22 @@
+name: Deploy to Lolipop
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Deploy via rsync
+        uses: burnett01/rsync-deployments@6.0.0
+        with:
+          switches: -avz --delete --exclude='.git*'
+          path: ./
+          remote_path: ${{ secrets.LOLIPOP_PATH }}
+          remote_host: ${{ secrets.LOLIPOP_HOST }}
+          remote_port: 2222
+          remote_user: ${{ secrets.LOLIPOP_USER }}
+          remote_key: ${{ secrets.LOLIPOP_KEY }}
